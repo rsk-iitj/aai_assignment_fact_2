@@ -21,12 +21,17 @@ def calc_POL(A: dict[str, dict[str, float]], B: dict[str, dict[str, float]], pi:
     states =  list(A.keys())
     N = len(states)
     outcomes = list(list(B.values())[0].keys())
+    print(outcomes)
     M = len(outcomes)
     T = len(observations)
     O = list(map(lambda x: outcomes.index(x) , observations))
+    print(O)
     a = [list(A[x].values()) for x in A]
+    print(a)
     b = [list(B[x].values()) for x in B]
+    print(b)
     alpha = forward(N, T, O, a, b, list(pi.values()))
+    print(alpha)
     pol = 0
     for i in range(N):
         pol += alpha[T-1][i]
