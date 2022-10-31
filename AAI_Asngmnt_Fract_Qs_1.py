@@ -3,20 +3,24 @@ import pandas as pd
 import random
 import numpy as np
 
+# Initial Assumptions
 actual_temp = 33.5
 err_in_measur = 3.5
 err_in_est = 1.4
 est_value = 32.5
 no_mears = 10
 
+# List DS to store values to display
 mesr_value_list = []
 est_value_list = []
 kalman_gain_list = []
 err_est_list = []
 
+# Calculate Kalman Gain
 def return_kalman_gain(error_est, error_msr):
     return error_est / (error_est + error_msr)
 
+# Generate randomly 
 def return_mesure_temp():
     return random.uniform(30, 35)
 
@@ -39,11 +43,10 @@ def calculate_est_temp(err_in_est,est_value):
 def print_plot_results(final_est_temp):
     df_mesr = pd.DataFrame({'Measured Temp':mesr_value_list, 'Kalman Gain':kalman_gain_list,'Estimated Temp':est_value_list,'Error In Estimate':err_est_list})
     print(df_mesr.to_string())
-    print(f"\nFinal Estimated Temperature : {final_est_temp:.2f}")
-    time_intervals = x = np.linspace(0, 100, no_mears)
-    plt.plot(time_intervals, np.full(no_mears, actual_temp), label="Actual Value")
-    plt.plot(time_intervals, mesr_value_list, label="Measured Value")
-    plt.plot(time_intervals, est_value_list, label="Estimated Value")
+    print(f"\nFinal Estimated Temperature : {est_value:.2f}")
+    plt.plot( np.linspace(0, 100, no_mears), np.full(no_mears, actual_temp), label="Actual Value")
+    plt.plot( np.linspace(0, 100, no_mears), mesr_value_list, label="Measured Value")
+    plt.plot( np.linspace(0, 100, no_mears), est_value_list, label="Estimated Value")
     plt.title("Trend of Measured,Estimated & Correct Temperature")
     plt.xlabel("No of Iterations - Time")
     plt.ylabel("Temperature")

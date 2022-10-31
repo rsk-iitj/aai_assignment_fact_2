@@ -25,7 +25,6 @@ def calc_POL(A: dict[str, dict[str, float]], B: dict[str, dict[str, float]], pi:
     M = len(outcomes)
     T = len(observations)
     O = list(map(lambda x: outcomes.index(x) , observations))
-    print(O)
     a = [list(A[x].values()) for x in A]
     print(a)
     b = [list(B[x].values()) for x in B]
